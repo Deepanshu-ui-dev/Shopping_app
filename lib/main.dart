@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shoping_app/constants/global_variable.dart';
 import 'package:shoping_app/features/auth/screens/auth_screen.dart';
 import 'package:shoping_app/router.dart';
 
@@ -16,10 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: GlobalVariable.backgroundColor,
-        colorScheme: ColorScheme.light(
-          primary: GlobalVariable.secondaryColor,
-        ),
+       
         appBarTheme: const AppBarTheme(
           elevation: 0,
           iconTheme: IconThemeData(
