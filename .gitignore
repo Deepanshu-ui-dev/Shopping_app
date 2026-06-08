@@ -43,3 +43,32 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Environment and Credentials (Sensitive Data)
+.env
+.env.local
+.env.*.local
+.env.production
+config.dart
+lib/config/config.dart
+
+# Backend dependencies and credentials
+server/node_modules/
+server/.env
+server/.env.local
+server/config.js
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build
+build/
+dist/

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// Design tokens compatible with ShadcnUI theme.
-/// Use `ShadTheme.of(context)` for runtime access.
-/// These constants are for places where context is unavailable.
+// Backend URL - read from environment or use localhost
+// For production, set via: flutter run --dart-define=BACKEND_URL=your_url
+const String uri = String.fromEnvironment(
+  'BACKEND_URL',
+  defaultValue: 'http://localhost:3000',
+);
+
 class GlobalVariable {
   // ── User Provided Light Palette ─────────────────────────────
   static const primaryColor = Color(0xFF6367FF);
