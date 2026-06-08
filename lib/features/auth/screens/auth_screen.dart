@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:shoping_app/features/auth/services/auth_services.dart';
 import 'package:shoping_app/constants/global_variable.dart';
 
 enum Auth { signin, signup }
@@ -16,46 +17,68 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   bool _obscurePassword = true;
   bool _isLoading = false;
+  final AuthServices authServices = AuthServices();
 
   final _signupFormKey = GlobalKey<ShadFormState>();
   final _signinFormKey = GlobalKey<ShadFormState>();
+  final TextEditingController nameController = TextEditingController();
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
 
   @override
+
+  void dispose() {
+  nameController.dispose();
+  emailController.dispose();
+  passwordController.dispose();
+  super.dispose();
+}
+
+void signUpUser() {
+  authServices.singUpUser(
+    context: context,
+    name: nameController.text,
+    email: emailController.text,
+    password: passwordController.text,
+  );
+}
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
 
-    return Scaffold(
-      backgroundColor: theme.colorScheme.background,
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.white,
-                GlobalVariable.highlightColor,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // ── Brand Header ──────────────────────────────
-                  _buildBrandHeader(theme),
-                  const SizedBox(height: 36),
-
-                  // ── Auth Tabs Card ────────────────────────────
-                  _buildAuthTabs(theme),
-
-                  const SizedBox(height: 28),
-
-                  // ── Social Login ──────────────────────────────
-                  _buildSocialLogin(theme),
+    return SingleChildScrollView(
+      child: Scaffold(
+        backgroundColor: theme.colorScheme.background,
+        body: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.white,
+                  GlobalVariable.highlightColor,
                 ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // ── Brand Header ──────────────────────────────
+                    _buildBrandHeader(theme),
+                    const SizedBox(height: 36),
+      
+                    // ── Auth Tabs Card ────────────────────────────
+                    _buildAuthTabs(theme),
+      
+                    const SizedBox(height: 28),
+      
+                    // ── Social Login ──────────────────────────────
+                    _buildSocialLogin(theme),
+                  ],
+                ),
               ),
             ),
           ),
@@ -139,7 +162,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 onPressed: () {
                   if (_signupFormKey.currentState!.saveAndValidate()) {
                     setState(() => _isLoading = true);
-                    // TODO: signup logic
+                    signUpUser();
                   }
                 },
                 leading: _isLoading
@@ -162,6 +185,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ShadInputFormField(
+                        controller: nameController,
                         id: 'name',
                         label: const Text('Full Name'),
                         placeholder: const Text('Enter your full name'),
@@ -173,6 +197,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       const SizedBox(height: 12),
                       ShadInputFormField(
+                        controller: emailController,
                         id: 'email',
                         label: const Text('Email'),
                         placeholder: const Text('you@example.com'),
@@ -186,7 +211,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       const SizedBox(height: 12),
                       ShadInputFormField(
-                        id: 'password',
+                        controller: passwordController  ,
                         label: const Text('Password'),
                         placeholder: const Text('Create a password'),
                         obscureText: _obscurePassword,
@@ -276,6 +301,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     children: [
                       ShadInputFormField(
                         id: 'email',
+                        controller: emailController,
                         label: const Text('Email'),
                         placeholder: const Text('you@example.com'),
                         keyboardType: TextInputType.emailAddress,
@@ -289,6 +315,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       const SizedBox(height: 12),
                       ShadInputFormField(
                         id: 'password',
+                        controller: passwordController,
                         label: const Text('Password'),
                         placeholder: const Text('Enter your password'),
                         obscureText: _obscurePassword,
