@@ -4,7 +4,7 @@ class User {
   final String id;
   final String name;
   final String email;
-  
+  final String password;
   final String address;
   final String type;
   final String token;
@@ -13,6 +13,7 @@ class User {
     required this.id,
     required this.name,
     required this.email,
+    required this.password,
     required this.address,
     required this.type,
     required this.token,
@@ -23,6 +24,7 @@ class User {
       '_id': id,
       'name': name,
       'email': email,
+      'password': password,
       'address': address,
       'type': type,
       'token': token,
@@ -34,6 +36,7 @@ class User {
       id: map['_id'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
+      password: map['password'] ?? '',
       address: map['address'] ?? '',
       type: map['type'] ?? '',
       token: map['token'] ?? '',
@@ -42,6 +45,5 @@ class User {
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) =>
-      User.fromMap(json.decode(source));
+  factory User.fromJson(String source) => User.fromMap(json.decode(source));
 }

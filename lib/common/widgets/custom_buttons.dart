@@ -25,10 +25,7 @@ class CustomButton extends StatelessWidget {
       enabled: !isLoading,
       onPressed: onPressed,
       gradient: LinearGradient(
-        colors: [
-          theme.colorScheme.primary,
-          theme.colorScheme.ring,
-        ],
+        colors: [theme.colorScheme.primary, theme.colorScheme.ring],
       ),
       shadows: [
         BoxShadow(

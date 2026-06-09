@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:shoping_app/constants/global_variable.dart';
+import 'package:shoping_app/theme/app_theme.dart';
 import 'package:shoping_app/features/auth/screens/auth_screen.dart';
 import 'package:shoping_app/router.dart';
 
@@ -28,10 +29,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'SHOPZI',
           debugShowCheckedModeBanner: false,
-          theme: Theme.of(context),
-          localizationsDelegates: const [
-            GlobalShadLocalizations.delegate,
-          ],
+          theme: AppTheme.light,
+          localizationsDelegates: const [GlobalShadLocalizations.delegate],
           builder: (context, child) {
             return ShadAppBuilder(child: child!);
           },

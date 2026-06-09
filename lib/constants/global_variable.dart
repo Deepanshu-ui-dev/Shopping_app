@@ -1,29 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:shoping_app/theme/app_theme.dart';
+// ══════════════════════════════════════════════════════════════════════════════
+//  SHOPZI — Global Variables & Theme
+// ══════════════════════════════════════════════════════════════════════════════
 
-// Backend URL - read from environment or use localhost
-// For production, set via: flutter run --dart-define=BACKEND_URL=your_url
-const String uri = String.fromEnvironment(
-  'BACKEND_URL',
-  defaultValue: 'http://localhost:3000',
-);
+const String uri = 'http://127.0.0.1:3000';
+
+// ══════════════════════════════════════════════════════════════════════════════
+//  GlobalVariable — kept for backward compatibility
+// ══════════════════════════════════════════════════════════════════════════════
 
 class GlobalVariable {
-  // ── User Provided Light Palette ─────────────────────────────
-  static const primaryColor = Color(0xFF6367FF);
-  static const secondaryColor = Color(0xFF8494FF);
-  static const accentSoft = Color(0xFFC9BEFF);
-  static const highlightColor = Color(0xFFFFDBFD);
-
-  // ── Shorthand aliases ─────────────────────────────────────────
-  static const backgroundColor = Color(0xFFFFFFFF);
-  static const Color greyBackgroundCOlor = Color(0xFFF4F4F5);
-  static var selectedNavBarColor = primaryColor;
-  static const unselectedNavBarColor = Color(0xFF71717A);
-  
-  // ── Gradients ─────────────────────────────────────────────────
-  static const brandGradient = LinearGradient(
-    colors: [primaryColor, secondaryColor],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+  static const primaryColor = AppColors.primary;
+  static const secondaryColor = AppColors.primaryLight;
+  static const accentSoft = AppColors.primarySoft;
+  static const highlightColor = AppColors.highlight;
+  static const backgroundColor = AppColors.white;
+  static const greyBackgroundCOlor = AppColors.grey100;
+  static var selectedNavBarColor = AppColors.navSelected;
+  static const unselectedNavBarColor = AppColors.navUnselected;
+  static const brandGradient = AppColors.brandGradient;
 }

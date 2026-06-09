@@ -8,17 +8,19 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const DB = process.env.MONGODB_URI;
+console.log('Mongo URI Loaded:', process.env.MONGODB_URI ? 'YES' : 'NO');
 
-// Middleware
 app.use(express.json());
 
-// Routes
 app.use(authrouter);
 
-// MongoDB Connection
+app.get('/', (req, res) => {
+  console.log('GET / HIT');
+  res.send('Server is running');
+});
+
 mongoose
-  .connect(DB)
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MongoDB Connected Successfully');
 
@@ -27,5 +29,6 @@ mongoose
     });
   })
   .catch((err) => {
-    console.log('MongoDB Error:', err);
+    console.error('MongoDB Connection Error:');
+    console.error(err);
   });
